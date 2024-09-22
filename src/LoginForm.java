@@ -61,7 +61,6 @@ public class LoginForm extends JFrame {
                         JOptionPane.ERROR_MESSAGE);                    
                     
                 }
-                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
             }
             
         });
