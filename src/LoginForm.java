@@ -1,8 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.*;
 
 import javax.swing.*;
 
@@ -90,7 +89,7 @@ public class LoginForm extends JFrame {
             final String PASSWORD = "";
 
             try{
-                Connection conn = DriverManager.getConnectioin(DB_URL, USERNAME, PASSWORD);
+                Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
                 //connected to database successfully...
 
                 String sql = "SELECT * FROM users WHERE email=? AND password =?";
@@ -98,7 +97,7 @@ public class LoginForm extends JFrame {
                 preparedStatement.setString(1, email);
                 preparedStatement.setString(2, password);
 
-                ResultSet ResultSet = preparedStatement.executeQuery();
+                ResultSet resultSet = preparedStatement.executeQuery();
 
                 if (resultSet.next()) {
                     user = new User ();
@@ -112,7 +111,9 @@ public class LoginForm extends JFrame {
                 conn.close();
                 
             }catch(Exception e){
-                
+                System.out.println("Database Connection failed");
             }
+            
+            return  user;
         }
 }
